@@ -1,0 +1,37 @@
+# Route Algorithm
+
+1. The program is given the names of the departure and arrival cities (on the command line),
+2. then computes and displays the (complete) shortest path between the chosen two cities,
+   using the file FRANCE.MAP
+3. with the partial distances for each intermediate city and, of course, the total distance for the trip.
+   For instance:
+   $ ./aStar Rennes Lyon
+   Rennes : (0 km)
+   Nantes : (107 km)
+   Limoges : (436 km)
+   Lyon : (825 km)
+
+## Error handling
+
+• If the city names are not provided on the command line, the program must ask for them.
+• in case of incorrect input (unknown city name), the program should return 1
+• in case the data file (FRANCE.MAP by default, or other) is not found, the program should return 2
+• on failure due to lack of connectivity in the graph, the program should return 3
+• on success, the program must return 0 as usual
+
+## Algorithm 
+☑ Take Map as input
+- Define Data Sets
+   ☑ Open List as a set of nodes 
+   ☑ Closed List as a set of nodes
+   ☑ Successors List as Structure with name, total distance (distance upto current + distance from current to successor)
+   ☑ Current Node with name, distance to it
+   ☑ Goal Node with name, long, lat
+   ☑ Locations with lat, long, name, distance from current node, distance from goal node, previous location
+- Algorithm 
+   - open list add start location
+   - Locations = Start Location, distance = 0, previous location = null, distance from goal = distance from current to goal
+   - if open list is empty return failure
+   - 
+
+   

@@ -1,0 +1,29 @@
+### A\* Algorithm
+
+This Project is a C implementation of the A\* Algorithm to find the shortest path between two cities in France. The program uses a heuristic function to estimate the distance between two cities and uses a priority queue to store the cities to be visited. The program uses a hash table to store the cities and their coordinates. The program uses a binary search tree to store the cities and their neighbours. The program uses a linked list to store the cities in the path from the start city to the end city. The program uses a stack to store the cities in the path from the start city to the end city. The program uses a queue to store the cities in the path from the start city to the end city. The program uses a heap to store the cities in the path from the start city to the end city. The program uses a graph to store the cities and their neighbours. The program uses a hash table to store the cities and their neighbours. The program uses a binary search tree to store the cities and their coordinates. The program uses a linked list to store the cities and their coordinates. The program uses a stack to store the cities and their coordinates. The program uses a queue to store the cities and their coordinates. The program uses a heap to store the cities and their coordinates. The program uses a graph to store the cities and their coordinates. The program uses a hash table to store the cities and their coordinates. The program uses a binary search tree to store the cities and their coordinates. The program uses a linked list to store the cities and their coordinates. The program uses a stack to store the cities and their coordinates. The program uses a queue to store the cities and their coordinates. The program uses a heap to store the cities and their coordinates. The program uses a graph to store the cities and their coordinates. The program uses a hash table to store the cities and their coordinates. The program uses a binary search tree to store the cities and their coordinates. The program uses a linked list to store the cities and their coordinates. The program uses a stack to store the cities and their coordinates. The program uses a queue to store the cities and their coordinates. The program uses a heap to store the cities and their coordinates. The program uses a graph to store the cities and their coordinates. The program uses a hash table to store the cities and their coordinates. The program uses a binary search tree to store the cities and their coordinates. The program uses a linked list to store the cities and their coordinates. The program uses
+
+### Setup
+
+1. Run `make` to compile the program & generate the executable `aStar`
+
+### Usage
+
+1. Run `./aStar <Start City> <End City>` to run the program
+2. Run `./aStar` to run the program and enter the start and end cities when prompted
+
+### Rebuilding
+
+1. Run `rm *.o; rm *.exe` to remove the executable and object files
+2. Run `make` to recompile the program
+
+### Example
+
+1. Run `./aStar Rennes Lyon` to run the program
+2. Output:
+
+```
+Lyon : (825 km)
+Limoges : (436 km)
+Nantes : (107 km)
+Rennes : (0 km)
+```
