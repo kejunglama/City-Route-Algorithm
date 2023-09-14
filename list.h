@@ -18,7 +18,7 @@
 #define __List_H
 
 #include <stdlib.h>
-#include "./Status/status.h"
+#include "./status/status.h"
 
 /** Typical simple link structure: a Node is a "value / next" pair */
 typedef struct Node

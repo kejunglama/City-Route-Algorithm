@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "./Status/status.h"
+#include "./status/status.h"
 #include "list.h"
 #include "map.h"
 

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./Status/status.h"
+#include "./status/status.h"
 #include "list.h"
 
 typedef struct City

@@ -4,8 +4,8 @@
 
 #include "list.h"
 #include "list.c"
-#include "./Status/status.h"
-#include "./Status/status.c"
+#include "./status/status.h"
+#include "./status/status.c"
 
 typedef struct City
 {
@@ -54,18 +54,11 @@ status createCity(char *name, int lat, int lon, City **city)
 {
     City *c = malloc(sizeof(City));
     if (c == NULL)
-    {
-        free(c);
         return ERRALLOC;
-    }
 
     c->name = malloc(sizeof(char) * (strlen(name) + 1));
     if (c->name == NULL)
-    {
-        free(c);
-        free(c->name);
         return ERRALLOC;
-    }
 
     strcpy(c->name, name);
     c->lat = lat;
@@ -88,27 +81,20 @@ status findCity(List *list, char *name, City **city)
 
     st = createCity(name, 0, 0, &c);
     if (st != OK)
-    {
-        free(c->name);
-        free(c);
-        return st;
-    }
+        return ERRALLOC;
 
-    if (!isInList(list, c))
+    if (isInList(list, c))
     {
-        free(c->name);
-        free(c);
+        if (isInList(list, c) == (Node *)1) // if the city is the head of the list
+            *city = (City *)list->head->val;
+        else
+        {
+            Node *n = isInList(list, c)->next;
+            *city = (City *)n->val;
+        }
+    }
+    else
         return ERRABSENT;
-    };
-
-    if (isInList(list, c) == (Node *)1) // if the city is the head of the list
-    {
-        *city = (City *)list->head->val;
-        return OK;
-    }
-
-    Node *n = isInList(list, c)->next;
-    *city = (City *)n->val;
     return OK;
 }
 
@@ -118,18 +104,12 @@ status createNeighbor(List *list, char *neighborName, int distance, Neighbor **n
     status st;
 
     Neighbor *neighbor = malloc(sizeof(Neighbor));
-    if (!neighbor)
-    {
-        free(neighbor);
+    if (neighbor == NULL)
         return ERRALLOC;
-    }
 
     st = findCity(list, neighborName, &neighborCity);
     if (st != OK)
-    {
-        free(neighbor);
         return st;
-    }
 
     neighbor->city = neighborCity;
     neighbor->distance = distance;
@@ -141,12 +121,12 @@ void displayMap(List *list)
 {
     Node *current = list->head;
     printf("Map:\n");
-    while (current)
+    while (current != NULL)
     {
         City *city = current->val;
         printf("%s (%d, %d)\n", city->name, city->lat, city->lon);
         Node *neighbor = city->neighbors->head;
-        while (neighbor)
+        while (neighbor != NULL)
         {
             Neighbor *n = neighbor->val;
             printf("  %s %d\n", n->city->name, n->distance);
@@ -167,19 +147,13 @@ status generateMap(List **list)
 
     // Open File
     FILE *file = fopen("FRANCE.MAP", "r");
-    if (!file)
-    {
-        fclose(file);
+    if (file == NULL)
         return ERROPEN;
-    }
 
     // Initialize
     List *map = newList(compCity, prCity);
     if (!map)
-    {
-        fclose(file);
         return ERRALLOC;
-    }
 
     // Populate Cities
     while (fgets(line, sizeof(line), file))
@@ -188,10 +162,7 @@ status generateMap(List **list)
         {
             st = createCity(name, lat, lon, &currentCity);
             if (st != OK)
-            {
-                fclose(file);
                 return st;
-            }
             st = addList(map, currentCity);
         }
     }
@@ -208,33 +179,30 @@ status generateMap(List **list)
         {
             st = findCity(map, name, &currentCity);
             if (st != OK)
-            {
-                fclose(file);
                 return st;
-            }
             currentCity->neighbors = newList(compNeighbor, prNeighbor);
+            // printf("Current city: %s\n", currentCity->name);
         }
 
         if (sscanf(line, "%s %d %d", name, &distance) == 2)
         {
-            Neighbor *neighbor;
+            Neighbor *neighbor = NULL;
+
             st = createNeighbor(map, name, distance, &neighbor);
             if (st != OK)
-            {
-                fclose(file);
                 return st;
-            }
+
+            // printf("Neighbor: %s\n", neighbor->city->name);
 
             st = addList(currentCity->neighbors, neighbor);
             if (st != OK)
-            {
-                fclose(file);
                 return st;
-            }
         }
     }
 
-    *list = map;
     fclose(file);
+    // displayList(map);
+    // displayMap(map);
+    *list = map;
     return OK;
 }

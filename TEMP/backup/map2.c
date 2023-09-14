@@ -4,8 +4,8 @@
 
 #include "list.h"
 #include "list.c"
-#include "./Status/status.h"
-#include "./Status/status.c"
+#include "./status/status.h"
+#include "./status/status.c"
 
 typedef struct City
 {

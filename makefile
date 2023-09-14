@@ -12,9 +12,8 @@ list.o: ./status/status.h list.h
 aStar.o : list.h ./status/status.h map.h
 	gcc -c aStar.c
 
-status.o : ./status/status.h 
-	gcc -c ./status/status.c
+status.o : status.h 
+	gcc -c status.c
 
 map.o : map.h ./status/status.h
 	gcc -c map.c
-
